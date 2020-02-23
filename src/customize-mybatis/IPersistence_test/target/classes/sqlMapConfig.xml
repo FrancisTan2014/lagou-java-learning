@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+
+    <datasource>
+        <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mysql:///custom_mybatis"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="root"></property>
+    </datasource>
+
+    <mapper resource="UserMapper.xml"></mapper>
+
+</configuration>

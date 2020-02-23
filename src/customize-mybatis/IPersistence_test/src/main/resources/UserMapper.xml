@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper namespace="User">
+
+    <statement id="queryList" resultMap="com.lagou.pojo.User">
+        SELECT * FROM `user`;
+    </statement>
+
+    <statement id="querySingle" resultType="com.lagou.pojo.User" parameterType="com.lagou.pojo.UserQuery">
+        SELECT * FROM `user` WHERE `id`=#{id} AND `username`=#{username};
+    </statement>
+
+</mapper>
