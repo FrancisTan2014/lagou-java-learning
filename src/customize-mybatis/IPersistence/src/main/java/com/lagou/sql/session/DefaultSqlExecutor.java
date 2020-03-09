@@ -39,7 +39,7 @@ public class DefaultSqlExecutor implements SqlExecutor {
         if (list.size() == 0) {
             return null;
         }
-        return (E) list.get(0);
+        return list.get(0);
     }
 
     @NotNull
@@ -56,6 +56,7 @@ public class DefaultSqlExecutor implements SqlExecutor {
                 Method writeMethod = propertyDescriptor.getWriteMethod();
                 writeMethod.invoke(o, value);
             }
+            list.add((E)o);
         }
         return list;
     }

@@ -11,4 +11,6 @@ public interface SqlSession {
 
     <E> E querySingle(String statementId, Object... params) throws IllegalAccessException, IntrospectionException, InstantiationException, NoSuchFieldException, SQLException, InvocationTargetException, ClassNotFoundException;
 
+    <T> T getMapper(Class<?> mapperClass);
+
 }

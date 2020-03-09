@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="af342eb1-0c40-4470-b43c-2e8449080a70" name="Default Changelist" comment="" />
+    <list default="true" id="af342eb1-0c40-4470-b43c-2e8449080a70" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/IPersistence.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/dao/IUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/test/ORMTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/test/ORMTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/sqlMapConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/sqlMapConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/target/classes/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/target/classes/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/target/classes/sqlMapConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/target/classes/sqlMapConfig.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +51,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -44,6 +62,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1Y8yQvX6IB3svzDJl4QXKOxcIy1" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -52,9 +71,11 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -72,7 +93,7 @@
       <recent name="com.lagou.config" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.ORMTest.test">
     <configuration name="ORMTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
       <module name="IPersistence_test" />
@@ -86,8 +107,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ORMTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IPersistence_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ORMTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IPersistence_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ORMTest.test" />
+        <item itemvalue="JUnit.ORMTest" />
         <item itemvalue="Application.ORMTest" />
       </list>
     </recent_temporary>
@@ -105,6 +159,7 @@
       <workItem from="1582338507430" duration="2032000" />
       <workItem from="1582341650587" duration="8973000" />
       <workItem from="1582452787299" duration="8921000" />
+      <workItem from="1582508151346" duration="13108000" />
     </task>
     <servers />
   </component>
@@ -136,42 +191,59 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1010" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1582462151562" />
-    <state width="1879" height="348" key="GridCell.Tab.0.bottom" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="393" key="GridCell.Tab.0.bottom" timestamp="1583720897745">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.0.center" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="272" key="GridCell.Tab.0.bottom/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697224" />
+    <state width="1574" height="393" key="GridCell.Tab.0.bottom/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
+    <state width="1574" height="393" key="GridCell.Tab.0.center" timestamp="1583720897744">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.0.left" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="272" key="GridCell.Tab.0.center/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697223" />
+    <state width="1574" height="393" key="GridCell.Tab.0.center/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897744" />
+    <state width="1574" height="393" key="GridCell.Tab.0.left" timestamp="1583720897743">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.0.right" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="272" key="GridCell.Tab.0.left/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697222" />
+    <state width="1574" height="393" key="GridCell.Tab.0.left/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897743" />
+    <state width="1574" height="393" key="GridCell.Tab.0.right" timestamp="1583720897744">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.1.bottom" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="272" key="GridCell.Tab.0.right/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697223" />
+    <state width="1574" height="393" key="GridCell.Tab.0.right/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897744" />
+    <state width="1574" height="393" key="GridCell.Tab.1.bottom" timestamp="1583720897747">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.1.center" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="393" key="GridCell.Tab.1.bottom/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
+    <state width="1574" height="393" key="GridCell.Tab.1.bottom/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897747" />
+    <state width="1574" height="393" key="GridCell.Tab.1.center" timestamp="1583720897745">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.1.left" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="393" key="GridCell.Tab.1.center/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
+    <state width="1574" height="393" key="GridCell.Tab.1.center/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
+    <state width="1574" height="393" key="GridCell.Tab.1.left" timestamp="1583720897745">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1879" height="348" key="GridCell.Tab.1.right" timestamp="1582462204801">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="393" key="GridCell.Tab.1.left/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
+    <state width="1574" height="393" key="GridCell.Tab.1.left/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
+    <state width="1574" height="393" key="GridCell.Tab.1.right" timestamp="1583720897746">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state width="1879" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state x="490" y="175" key="Maven.ArtifactSearchDialog" timestamp="1582344347884">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1574" height="393" key="GridCell.Tab.1.right/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
+    <state width="1574" height="393" key="GridCell.Tab.1.right/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897746" />
+    <state x="413" y="196" key="Maven.ArtifactSearchDialog" timestamp="1583484244508">
+      <screen x="0" y="23" width="1617" height="1027" />
     </state>
     <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582344347884" />
+    <state x="413" y="196" key="Maven.ArtifactSearchDialog/0.23.1617.1027@0.23.1617.1027" timestamp="1583484244508" />
     <state x="392" y="194" key="SettingsEditor" timestamp="1582459704929">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
