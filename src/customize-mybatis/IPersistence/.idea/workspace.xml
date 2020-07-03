@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="af342eb1-0c40-4470-b43c-2e8449080a70" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/IPersistence.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/dao/IUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/config/XmlMapperResolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/config/XmlMapperResolver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/pojo/MappedStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/pojo/MappedStatement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/pojo/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/pojo/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlExecutor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/lagou/sql/session/SqlSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../IPersistence_test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/dao/IUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/dao/IUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/test/ORMTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/java/com/lagou/test/ORMTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/UserMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/sqlMapConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../IPersistence_test/src/main/resources/sqlMapConfig.xml" afterDir="false" />
@@ -48,28 +69,24 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="1Y8yQvX6IB3svzDJl4QXKOxcIy1" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -82,7 +99,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -93,20 +111,7 @@
       <recent name="com.lagou.config" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ORMTest.test">
-    <configuration name="ORMTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
-      <module name="IPersistence_test" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.lagou.test.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.ORMTest.testDelete">
     <configuration name="ORMTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="IPersistence_test" />
       <extension name="coverage">
@@ -138,11 +143,61 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ORMTest.testDelete" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IPersistence_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
+      <option name="METHOD_NAME" value="testDelete" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ORMTest.testInsert" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IPersistence_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
+      <option name="METHOD_NAME" value="testInsert" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ORMTest.testUpdate" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="IPersistence_test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lagou.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.lagou.test" />
+      <option name="MAIN_CLASS_NAME" value="com.lagou.test.ORMTest" />
+      <option name="METHOD_NAME" value="testUpdate" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ORMTest.testDelete" />
+        <item itemvalue="JUnit.ORMTest.testUpdate" />
+        <item itemvalue="JUnit.ORMTest.testInsert" />
         <item itemvalue="JUnit.ORMTest.test" />
         <item itemvalue="JUnit.ORMTest" />
-        <item itemvalue="Application.ORMTest" />
       </list>
     </recent_temporary>
   </component>
@@ -160,122 +215,103 @@
       <workItem from="1582341650587" duration="8973000" />
       <workItem from="1582452787299" duration="8921000" />
       <workItem from="1582508151346" duration="13108000" />
+      <workItem from="1593415451394" duration="936000" />
+      <workItem from="1593416422522" duration="178000" />
+      <workItem from="1593416620484" duration="1686000" />
+      <workItem from="1593422282410" duration="3606000" />
+      <workItem from="1593484394800" duration="4185000" />
+      <workItem from="1593566465067" duration="1498000" />
+      <workItem from="1593675327189" duration="8704000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#SQL_Dialects" timestamp="1582460739864">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="470" y="131" key="#com.intellij.ide.util.MemberChooser" timestamp="1593679096753">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="552" y="178" key="#SQL_Dialects/0.0.1920.1040@0.0.1920.1040" timestamp="1582460739864" />
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582461006226">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="470" y="131" key="#com.intellij.ide.util.MemberChooser/0.0.1440.860@0.0.1440.860" timestamp="1593679096753" />
+    <state x="58" y="0" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog" timestamp="1593422447512">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="552" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582461006226" />
-    <state x="654" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1582339492963">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="58" y="0" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog/0.0.1440.860@0.0.1440.860" timestamp="1593422447512" />
+    <state width="429" height="466" key="DebuggerActiveHint" timestamp="1593683907347">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="654" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1582339492963" />
-    <state x="755" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1582461300865">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="429" height="466" key="DebuggerActiveHint/0.0.1440.860@0.0.1440.860" timestamp="1593683907347" />
+    <state x="500" y="185" key="FileChooserDialogImpl" timestamp="1593416288956">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="755" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1582461300865" />
-    <state x="647" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1582344801638">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="500" y="185" key="FileChooserDialogImpl/0.0.1440.860@0.0.1440.860" timestamp="1593416288956" />
+    <state width="1397" height="214" key="GridCell.Tab.0.bottom" timestamp="1593684181752">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="647" y="380" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1040@0.0.1920.1040" timestamp="1582344801638" />
-    <state width="1010" height="466" key="DebuggerActiveHint" timestamp="1582462151562">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1397" height="214" key="GridCell.Tab.0.bottom/0.0.1440.860@0.0.1440.860" timestamp="1593684181752" />
+    <state width="1397" height="214" key="GridCell.Tab.0.center" timestamp="1593684181752">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1010" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1582462151562" />
-    <state width="1574" height="393" key="GridCell.Tab.0.bottom" timestamp="1583720897745">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="214" key="GridCell.Tab.0.center/0.0.1440.860@0.0.1440.860" timestamp="1593684181752" />
+    <state width="1397" height="214" key="GridCell.Tab.0.left" timestamp="1593684181752">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="272" key="GridCell.Tab.0.bottom/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697224" />
-    <state width="1574" height="393" key="GridCell.Tab.0.bottom/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
-    <state width="1574" height="393" key="GridCell.Tab.0.center" timestamp="1583720897744">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="214" key="GridCell.Tab.0.left/0.0.1440.860@0.0.1440.860" timestamp="1593684181752" />
+    <state width="1397" height="214" key="GridCell.Tab.0.right" timestamp="1593684181752">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="272" key="GridCell.Tab.0.center/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697223" />
-    <state width="1574" height="393" key="GridCell.Tab.0.center/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897744" />
-    <state width="1574" height="393" key="GridCell.Tab.0.left" timestamp="1583720897743">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="214" key="GridCell.Tab.0.right/0.0.1440.860@0.0.1440.860" timestamp="1593684181752" />
+    <state width="1397" height="266" key="GridCell.Tab.1.bottom" timestamp="1593684181749">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="272" key="GridCell.Tab.0.left/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697222" />
-    <state width="1574" height="393" key="GridCell.Tab.0.left/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897743" />
-    <state width="1574" height="393" key="GridCell.Tab.0.right" timestamp="1583720897744">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="266" key="GridCell.Tab.1.bottom/0.0.1440.860@0.0.1440.860" timestamp="1593684181749" />
+    <state width="1397" height="266" key="GridCell.Tab.1.center" timestamp="1593684181749">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="272" key="GridCell.Tab.0.right/0.23.1616.1027@0.23.1616.1027" timestamp="1582514697223" />
-    <state width="1574" height="393" key="GridCell.Tab.0.right/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897744" />
-    <state width="1574" height="393" key="GridCell.Tab.1.bottom" timestamp="1583720897747">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="266" key="GridCell.Tab.1.center/0.0.1440.860@0.0.1440.860" timestamp="1593684181749" />
+    <state width="1397" height="266" key="GridCell.Tab.1.left" timestamp="1593684181748">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="393" key="GridCell.Tab.1.bottom/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
-    <state width="1574" height="393" key="GridCell.Tab.1.bottom/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897747" />
-    <state width="1574" height="393" key="GridCell.Tab.1.center" timestamp="1583720897745">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="266" key="GridCell.Tab.1.left/0.0.1440.860@0.0.1440.860" timestamp="1593684181748" />
+    <state width="1397" height="266" key="GridCell.Tab.1.right" timestamp="1593684181749">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="393" key="GridCell.Tab.1.center/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
-    <state width="1574" height="393" key="GridCell.Tab.1.center/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
-    <state width="1574" height="393" key="GridCell.Tab.1.left" timestamp="1583720897745">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state width="1397" height="266" key="GridCell.Tab.1.right/0.0.1440.860@0.0.1440.860" timestamp="1593684181749" />
+    <state x="250" y="85" key="Maven.ArtifactSearchDialog" timestamp="1593417237739">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="393" key="GridCell.Tab.1.left/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
-    <state width="1574" height="393" key="GridCell.Tab.1.left/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897745" />
-    <state width="1574" height="393" key="GridCell.Tab.1.right" timestamp="1583720897746">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state x="250" y="85" key="Maven.ArtifactSearchDialog/0.0.1440.860@0.0.1440.860" timestamp="1593417237739" />
+    <state x="261" y="55" key="SettingsEditor" timestamp="1593678389538">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state width="1879" height="348" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1582462204801" />
-    <state width="1574" height="393" key="GridCell.Tab.1.right/0.23.1616.1027@0.23.1616.1027" timestamp="1582511213865" />
-    <state width="1574" height="393" key="GridCell.Tab.1.right/0.23.1617.1027@0.23.1617.1027" timestamp="1583720897746" />
-    <state x="413" y="196" key="Maven.ArtifactSearchDialog" timestamp="1583484244508">
-      <screen x="0" y="23" width="1617" height="1027" />
+    <state x="261" y="55" key="SettingsEditor/0.0.1440.860@0.0.1440.860" timestamp="1593678389538" />
+    <state x="450" y="178" key="extract.method.dialog" timestamp="1593677115166">
+      <screen x="0" y="0" width="1440" height="860" />
     </state>
-    <state x="490" y="175" key="Maven.ArtifactSearchDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582344347884" />
-    <state x="413" y="196" key="Maven.ArtifactSearchDialog/0.23.1617.1027@0.23.1617.1027" timestamp="1583484244508" />
-    <state x="392" y="194" key="SettingsEditor" timestamp="1582459704929">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="392" y="194" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1582459704929" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1582462151559">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1582462151559" />
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1582452785807">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582452785807" />
-    <state x="678" y="275" key="extract.method.dialog" timestamp="1582459283405">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="678" y="275" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582459283405" />
-    <state x="334" y="214" key="new project wizard" timestamp="1582338550830">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="334" y="214" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1582338550830" />
-    <state x="601" y="246" width="700" height="530" key="recent.locations.popup" timestamp="1582455029851">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="601" y="246" width="700" height="530" key="recent.locations.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582455029851" />
-    <state x="702" y="139" key="refactoring.ChangeSignatureDialog" timestamp="1582459503873">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="702" y="139" key="refactoring.ChangeSignatureDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1582459503873" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1582345804384">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1582345804384" />
+    <state x="450" y="178" key="extract.method.dialog/0.0.1440.860@0.0.1440.860" timestamp="1593677115166" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/lagou/sql/session/DefaultSqlSession.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/IPersistence$ORMTest.ic" NAME="ORMTest Coverage Results" MODIFIED="1582461798613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

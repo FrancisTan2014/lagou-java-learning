@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<mapper namespace="com.lagou.sql.session.User">
+<mapper namespace="com.lagou.dao.IUserRepository">
 
-    <statement id="queryList" resultMap="com.lagou.pojo.User">
+    <select id="queryList" resultMap="com.lagou.pojo.User">
         SELECT `id`, `username` FROM `user`;
-    </statement>
+    </select>
 
-    <statement id="querySingle" resultType="com.lagou.pojo.User" parameterType="com.lagou.pojo.UserQuery">
+    <select id="querySingle" resultType="com.lagou.pojo.User" parameterType="com.lagou.pojo.UserQuery">
         SELECT `id`, `username` FROM `user` WHERE `id`=#{id} AND `username`=#{username};
-    </statement>
+    </select>
+
+    <insert id="insert" resultType="int" parameterType="com.lagou.pojo.User">
+        INSERT INTO `user`(`username`) VALUES(#{username});
+    </insert>
+
+    <update id="update" resultType="int" parameterType="com.lagou.pojo.User">
+        UPDATE `user` SET `username`=#{username} WHERE `id`=#{id};
+    </update>
+
+    <delete id="delete" resultType="bool" parameterType="java.lang.Integer">
+        DELETE FROM `user` WHERE `id`=#{id};
+    </delete>
 
 </mapper>

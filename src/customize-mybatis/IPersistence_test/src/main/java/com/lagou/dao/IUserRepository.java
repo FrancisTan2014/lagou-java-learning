@@ -15,4 +15,10 @@ public interface IUserRepository {
     List<User> queryList();
 
     User querySingle(UserQuery query);
+
+    int insert(User user);
+
+    int update(User user);
+
+    boolean delete(Integer id);
 }

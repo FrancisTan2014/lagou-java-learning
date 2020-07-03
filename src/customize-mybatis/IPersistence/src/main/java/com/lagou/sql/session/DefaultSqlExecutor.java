@@ -18,28 +18,58 @@ import java.util.List;
 
 public class DefaultSqlExecutor implements SqlExecutor {
 
-    public <E> List<E> queryList(DataSource dataSource, MappedStatement statement, Object... params) {
-        return null;
-    }
-
-    public <E> E querySingle(DataSource dataSource, MappedStatement statement, Object... params)
-            throws SQLException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
+    private PreparedStatement getPreparedStatement(DataSource dataSource, MappedStatement statement, Object... params)
+            throws SQLException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException {
         // prepare sql statement
         ParsedContent parsedContent = resolvePlaceholders(statement);
         Connection connection = dataSource.getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(parsedContent.getParsedSql());
         List<ParameterMapping> parameterMappings = parsedContent.getParameterMappings();
         Class<?> parameterType = getType(statement.getParameterType());
-        setParameters(preparedStatement, parameterMappings, parameterType, params[0]);
+        setParameters(preparedStatement, parameterMappings, parameterType, params);
+        return preparedStatement;
+    }
+
+    @Override
+    public <E> List<E> queryList(DataSource dataSource, MappedStatement statement, Object... params)
+            throws SQLException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException{
+        PreparedStatement preparedStatement = getPreparedStatement(dataSource, statement, params);
 
         // execute sql
         ResultSet resultSet = preparedStatement.executeQuery();
         Class<?> resultType = getType(statement.getResultType());
         List<E> list = mapEntities(resultSet, resultType);
+
+        return list;
+    }
+
+    @Override
+    public <E> E querySingle(DataSource dataSource, MappedStatement statement, Object... params)
+            throws SQLException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException, InstantiationException, IntrospectionException, InvocationTargetException {
+        List<E> list = queryList(dataSource, statement, params);
         if (list.size() == 0) {
             return null;
         }
         return list.get(0);
+    }
+
+    @Override
+    public int insert(DataSource dataSource, MappedStatement statement, Object... args) throws ClassNotFoundException,
+            SQLException, IllegalAccessException, NoSuchFieldException {
+        return update(dataSource, statement, args);
+    }
+
+    @Override
+    public int update(DataSource dataSource, MappedStatement statement, Object... args) throws ClassNotFoundException,
+            SQLException, IllegalAccessException, NoSuchFieldException {
+        PreparedStatement preparedStatement = getPreparedStatement(dataSource, statement, args);
+        return preparedStatement.executeUpdate();
+    }
+
+    @Override
+    public int delete(DataSource dataSource, MappedStatement statement, Object... args) throws ClassNotFoundException,
+            SQLException, IllegalAccessException, NoSuchFieldException {
+        return update(dataSource, statement, args);
     }
 
     @NotNull
@@ -62,13 +92,27 @@ public class DefaultSqlExecutor implements SqlExecutor {
     }
 
     private void setParameters(PreparedStatement preparedStatement,
-                               List<ParameterMapping> parameterMappings, Class<?> parameterType, Object param)
+                               List<ParameterMapping> parameterMappings, Class<?> parameterType, Object[] params)
             throws NoSuchFieldException, IllegalAccessException, SQLException {
+        if (params.length == 0) {
+            return;
+        }
+
         for (int i = 0; i < parameterMappings.size(); i++) {
             ParameterMapping mapping = parameterMappings.get(i);
             String content = mapping.getContent();
             // reflection
-            Object value = getFiledValue(parameterType, param, content);
+            Object value;
+            if (params.length == 1) {
+                Object arg = params[0];
+                if (arg.getClass().isPrimitive()) {
+                    value = arg;
+                } else {
+                    value = getFiledValue(parameterType, arg, content);
+                }
+            } else {
+                value = params[i];
+            }
             preparedStatement.setObject(i+1,  value);
         }
     }
