@@ -6,6 +6,15 @@ public class MappedStatement {
     private String resultType;
     private String parameterType;
     private String sql;
+    private SqlCommandType sqlCommandType;
+
+    public SqlCommandType getSqlCommandType() {
+        return sqlCommandType;
+    }
+
+    public void setSqlCommandType(SqlCommandType sqlCommandType) {
+        this.sqlCommandType = sqlCommandType;
+    }
 
     public String getId() {
         return id;

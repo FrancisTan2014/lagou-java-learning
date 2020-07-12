@@ -1,0 +1,3 @@
+com\lagou\test\ORMTest.class
+com\lagou\pojo\UserQuery.class
+com\lagou\dao\IUserRepository.class

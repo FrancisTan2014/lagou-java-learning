@@ -2,6 +2,7 @@ package com.lagou.config;
 
 import com.lagou.pojo.Configuration;
 import com.lagou.pojo.MappedStatement;
+import com.lagou.pojo.SqlCommandType;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -22,7 +23,7 @@ public class XmlMapperResolver {
         Document document = new SAXReader().read(stream);
         Element root = document.getRootElement();
         String namespace = root.attributeValue("namespace");
-        List<Element> mapperNodes = root.selectNodes("//statement");
+        List<Element> mapperNodes = root.selectNodes("//select | //insert | //update | //delete");
         for (Element node: mapperNodes) {
             MappedStatement statement = resolveStatement(node);
             String statementId = namespace + "." + statement.getId();
@@ -42,7 +43,21 @@ public class XmlMapperResolver {
         statement.setParameterType(parameterType);
         statement.setSql(sql);
 
+        String nodeName = node.getName();
+        SqlCommandType sqlCommandType = resolveCommandType(nodeName);
+        statement.setSqlCommandType(sqlCommandType);
+
         return statement;
+    }
+
+    private SqlCommandType resolveCommandType(String nodeName) {
+        switch (nodeName) {
+            case "insert": return SqlCommandType.INSERT;
+            case "update": return SqlCommandType.UPDATE;
+            case "delete": return SqlCommandType.DELETE;
+            case "select": return SqlCommandType.SELECT;
+            default: return SqlCommandType.UNKNOWN;
+        }
     }
 
 }

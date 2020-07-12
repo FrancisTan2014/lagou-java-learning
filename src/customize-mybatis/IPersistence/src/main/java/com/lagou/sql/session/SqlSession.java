@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface SqlSession {
 
-    <E> List<E> queryList(String statementId, Object... params);
+    <E> List<E> queryList(String statementId, Object... params) throws IllegalAccessException, IntrospectionException, InstantiationException, NoSuchFieldException, SQLException, InvocationTargetException, ClassNotFoundException;
 
     <E> E querySingle(String statementId, Object... params) throws IllegalAccessException, IntrospectionException, InstantiationException, NoSuchFieldException, SQLException, InvocationTargetException, ClassNotFoundException;
+
+    <T> T getMapper(Class<?> mapperClass);
 
 }
