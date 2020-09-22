@@ -1,11 +1,12 @@
 package com.lagou.controlers;
 
 import com.alibaba.fastjson.JSON;
+import com.lagou.ioc.BeanFactory;
+import com.lagou.ioc.impl.AppContextBeanFactory;
 import com.lagou.pojo.ApiResponse;
 import com.lagou.services.AccountService;
-import com.lagou.services.impl.DefaultAccountServiceImpl;
+import org.dom4j.DocumentException;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +17,16 @@ import java.sql.SQLException;
 @WebServlet(name = "transferServlet", urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {
 
-    private AccountService accountService = new DefaultAccountServiceImpl();
+    private AccountService accountService;
+
+    public TransferServlet() throws IOException, DocumentException,
+            IllegalAccessException, InstantiationException, ClassNotFoundException {
+        BeanFactory factory = new AppContextBeanFactory();
+        accountService = (AccountService) factory.getBean(AccountService.class.getTypeName());
+    }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String fromCardNo = req.getParameter("fromCardNo");
         String toCardNo = req.getParameter("toCardNo");
         Integer money = Integer.parseInt(req.getParameter("money"));
