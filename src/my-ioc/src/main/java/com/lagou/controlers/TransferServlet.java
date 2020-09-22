@@ -21,8 +21,12 @@ public class TransferServlet extends HttpServlet {
 
     public TransferServlet() throws IOException, DocumentException,
             IllegalAccessException, InstantiationException, ClassNotFoundException {
-        BeanFactory factory = new AppContextBeanFactory();
-        accountService = (AccountService) factory.getBean(AccountService.class.getTypeName());
+        try {
+            BeanFactory factory = new AppContextBeanFactory();
+            accountService = (AccountService) factory.getBean(AccountService.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -39,6 +43,8 @@ public class TransferServlet extends HttpServlet {
         } catch (SQLException e) {
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         String json = JSON.toJSONString(response);

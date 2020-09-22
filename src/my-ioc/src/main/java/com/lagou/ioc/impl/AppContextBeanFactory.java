@@ -1,11 +1,10 @@
 package com.lagou.ioc.impl;
 
-import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Iterables;
 import com.lagou.ioc.*;
 import com.lagou.utils.CollectionUtils;
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -17,12 +16,14 @@ import org.reflections.Reflections;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class AppContextBeanFactory implements BeanFactory {
 
@@ -39,7 +40,8 @@ public class AppContextBeanFactory implements BeanFactory {
 
     @Override
     public Object getBean(Class<?> type) {
-        return null;
+        String beanName = getOrAddTypeAndBeanNameMap(type);
+        return beans.get(beanName);
     }
 
     public AppContextBeanFactory() throws IOException, DocumentException,
@@ -176,12 +178,24 @@ public class AppContextBeanFactory implements BeanFactory {
         return definition;
     }
 
+    private String replacePropertyValue(String value) {
+        String regex = "\\$\\{(\\w+)\\}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(value);
+        if (false == matcher.find()) {
+            return value;
+        } else {
+            String propertyName = matcher.group(1);
+            return this.properties.getProperty(propertyName);
+        }
+    }
+
     private Property[] resolveBeanProperties(Node beanNode) {
         List<Node> nodes = beanNode.selectNodes("property");
         ArrayList<Property> list = new ArrayList<>();
         for (Node node: nodes) {
             String name = node.valueOf("@name");
-            String value = node.valueOf("@value");
+            String value = replacePropertyValue(node.valueOf("@value"));
             String ref = node.valueOf("@ref");
 
             Property property = new Property();
@@ -204,6 +218,8 @@ public class AppContextBeanFactory implements BeanFactory {
             }
             properties.load(stream);
         }
+
+        this.properties = properties;
     }
 
     private void createBeans()
@@ -246,22 +262,35 @@ public class AppContextBeanFactory implements BeanFactory {
             Class<?> type = Class.forName(definition.getKlass());
             String beanName = definition.getId();
 
-            Class<?>[] interfaces = type.getInterfaces();
-            List<Class<?>> classes = Arrays.asList(interfaces);
-            Class<?> superclass = type.getSuperclass();
-            if (false == superclass.equals(Object.class)) {
-                // exclude the Object.class
-                classes.add(superclass);
-            }
-            classes.add(type);
-
-            for (Class<?> c: classes) {
-                // dealing with repeated type
-                if (false == beanTypeAndNamesMap.containsKey(c)) {
-                    beanTypeAndNamesMap.put(c, beanName);
-                }
+            // dealing with repeated type
+            if (false == beanTypeAndNamesMap.containsKey(type)) {
+                beanTypeAndNamesMap.put(type, beanName);
             }
         }
+    }
+
+    private String getOrAddTypeAndBeanNameMap(Class<?> type) {
+        AtomicReference<String> beanName = new AtomicReference<>(beanTypeAndNamesMap.get(type));
+        if (beanName.get() != null) {
+            return beanName.get();
+        }
+
+        // Iterate all the keys of beanTypeAndNamesMap to find
+        // out if there is a type which inherited from current type.
+        beanTypeAndNamesMap.forEachKey(1000, k -> {
+            if (type.isAssignableFrom(k)) {
+                String name = beanTypeAndNamesMap.get(k);
+                beanName.set(name);
+                // put the new type to the map for reducing the next search
+                beanTypeAndNamesMap.put(type, name);
+            }
+        });
+
+        if (Strings.isNullOrEmpty(beanName.get())) {
+            // TODO: dealing with the situation that sub type cannot be found
+        }
+
+        return beanName.get();
     }
 
     private void setAutowiredMembers(Class<?> type, Object instance)
@@ -269,13 +298,15 @@ public class AppContextBeanFactory implements BeanFactory {
         Set<Field> autowiredFields = ReflectionUtils.getAllFields(
                 type, f -> f.isAnnotationPresent(Autowired.class));
         for (Field field: autowiredFields) {
-            String beanName = beanTypeAndNamesMap.get(field.getType());
+            String beanName = getOrAddTypeAndBeanNameMap(field.getType());
             Object bean = beans.get(beanName);
             if (bean == null) {
                 BeanDefinition definition = CollectionUtils.getSingleOrDefault(
                         Arrays.asList(this.configuration.getBeanDefinitions().clone()),
                         d -> d.getId() == beanName
                 );
+                // TODO: add the new bean definition to the list
+
                 createBean(definition);
                 bean = beans.get(beanName);
             }
@@ -301,11 +332,14 @@ public class AppContextBeanFactory implements BeanFactory {
         if (properties != null) {
             for (Property prop: properties) {
                 try {
-                    Field field = type.getDeclaredField(prop.getName());
+                    Field field = FieldUtils.getField(type, prop.getName(), true);
+                    if (field == null) {
+                        continue;
+                    }
 
                     Object value;
                     String ref = prop.getRef();
-                    if (Strings.isNullOrEmpty(ref)) {
+                    if (false == Strings.isNullOrEmpty(ref)) {
                         Object refObject = beans.get(ref);
                         if (refObject == null) {
                             BeanDefinition definition = CollectionUtils.getSingleOrDefault(
@@ -324,8 +358,10 @@ public class AppContextBeanFactory implements BeanFactory {
                         value = parse(prop.getValue(), field.getType());
                     }
 
-                    setField(instance, field, value);
-                } catch (IllegalAccessException | NoSuchFieldException e) {
+
+                    FieldUtils.writeField(field, instance, value, true);
+//                    setField(instance, field, value);
+                } catch (IllegalAccessException e) {
                     // To make the sample easier, we ignored the exceptions here.
                 }
             }
@@ -347,6 +383,8 @@ public class AppContextBeanFactory implements BeanFactory {
             result = Integer.parseInt(value);
         } else if (type.equals(long.class) || type.equals(Long.class)) {
             result = Long.parseLong(value);
+        } else if (type.equals(boolean.class) || type.equals(Boolean.class)) {
+            result = Boolean.parseBoolean(value);
         } else {
             // To make the sample easier, we ignore the other situations.
         }
