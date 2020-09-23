@@ -10,6 +10,7 @@
         -->
         <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
             <property name="jdbcUrl" value="${jdbc_url}" />
+            <property name="url" value="${jdbc_url}" />
             <property name="username" value="${jdbc_username}" />
             <property name="password" value="${jdbc_password}" />
 

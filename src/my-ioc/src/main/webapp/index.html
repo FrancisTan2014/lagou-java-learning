@@ -87,7 +87,7 @@
                     timeout:5000,    //超时时间
                     dataType:'json', //返回的数据格式：json/xml/html/script/jsonp/text
                     success:function(data){
-                        if("200" == data.status){
+                        if("200" == data.statusCode){
                             alert("转账成功~~~");
                         }else{
                             alert("转账失败~~~,message:" + data.message);

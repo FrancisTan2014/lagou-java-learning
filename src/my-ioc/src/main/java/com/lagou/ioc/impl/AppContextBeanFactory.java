@@ -244,14 +244,14 @@ public class AppContextBeanFactory implements BeanFactory {
         // consider the cycle-reference situations.
         Object instance = type.newInstance();
 
-        // invoke the init-method if exists
-        invokeNoParamsMethod(type, instance, definition.getInitMethod());
-
         // set properties
         setProperties(type, instance, definition.getProperties());
 
         // set Autowired members
         setAutowiredMembers(type, instance);
+
+        // invoke the init-method if exists
+        invokeNoParamsMethod(type, instance, definition.getInitMethod());
 
         String name = definition.getId();
         beans.put(name, instance);
@@ -297,6 +297,8 @@ public class AppContextBeanFactory implements BeanFactory {
             throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Set<Field> autowiredFields = ReflectionUtils.getAllFields(
                 type, f -> f.isAnnotationPresent(Autowired.class));
+
+        // To make the sample easier, we just handle the private fields here.
         for (Field field: autowiredFields) {
             String beanName = getOrAddTypeAndBeanNameMap(field.getType());
             Object bean = beans.get(beanName);
@@ -311,7 +313,7 @@ public class AppContextBeanFactory implements BeanFactory {
                 bean = beans.get(beanName);
             }
 
-            setField(instance, field, bean);
+            FieldUtils.writeField(field, instance, bean, true);
         }
     }
 
@@ -358,21 +360,12 @@ public class AppContextBeanFactory implements BeanFactory {
                         value = parse(prop.getValue(), field.getType());
                     }
 
-
                     FieldUtils.writeField(field, instance, value, true);
-//                    setField(instance, field, value);
                 } catch (IllegalAccessException e) {
                     // To make the sample easier, we ignored the exceptions here.
                 }
             }
         }
-    }
-
-    private void setField(Object instance, Field field, Object value) throws IllegalAccessException {
-        boolean accessible = field.isAccessible();
-        field.setAccessible(true);
-        field.set(instance, value);
-        field.setAccessible(accessible);
     }
 
     private Object parse(String value, Class<?> type) {
