@@ -3,7 +3,9 @@ package com.lagou.ioc.impl;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.lagou.ioc.*;
+import com.lagou.ioc.aop.TransactionInterceptor;
 import com.lagou.utils.CollectionUtils;
+import net.sf.cglib.proxy.Enhancer;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -27,8 +29,12 @@ import java.util.regex.Pattern;
 
 public class AppContextBeanFactory implements BeanFactory {
 
-    private ConcurrentHashMap<String, Object> beans = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<Class<?>, String> beanTypeAndNamesMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Object> beans = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Class<?>, String> beanTypeAndNamesMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, CreationState> objectCreationStates = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<String, Set<Unfilled>> unfilledFields = new ConcurrentHashMap<>();
+
+    private final long PARALLELISM_THRESHOLD = 1000L;
 
     private IocConfiguration configuration;
     private Properties properties;
@@ -225,24 +231,44 @@ public class AppContextBeanFactory implements BeanFactory {
     private void createBeans()
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException {
-        // create super type and bean name map for querying between
-        // super types and sub types in the following steps
-        createSuperTypeAndBeanNameMap();
+        // create type name and bean name map for querying in the following steps
+        createTypeNameAndBeanNameMap();
 
         // Create instances for every bean definition and put to the table
         for (BeanDefinition definition: this.configuration.getBeanDefinitions()) {
             createBean(definition);
         }
+
+        // A simple way to avoid the cycle-reference
+        dealWithUnfilledFields();
+    }
+
+    private void dealWithUnfilledFields() {
+        unfilledFields.forEachValue(PARALLELISM_THRESHOLD, set -> {
+            for (Unfilled unfilled: set) {
+                try {
+                    Object bean = this.getBeanInternal(unfilled.field.getType());
+                    FieldUtils.writeField(unfilled.field, unfilled.instance, bean, true);
+                } catch (Exception e) {
+                    // ignored
+                }
+            }
+        });
     }
 
     private void createBean(BeanDefinition definition)
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException {
+        setBeanCreationState(definition.getId(), CreationState.Creating);
+
         Class<?> type = Class.forName(definition.getKlass());
         // To make the sample easier, we don't consider the situation
         // that the constructor has parameters. And also we don't
         // consider the cycle-reference situations.
-        Object instance = type.newInstance();
+        Object instance = createInstance(type);
+
+        // put the bean to the map
+        beans.put(definition.getId(), instance);
 
         // set properties
         setProperties(type, instance, definition.getProperties());
@@ -253,11 +279,82 @@ public class AppContextBeanFactory implements BeanFactory {
         // invoke the init-method if exists
         invokeNoParamsMethod(type, instance, definition.getInitMethod());
 
-        String name = definition.getId();
-        beans.put(name, instance);
+        setBeanCreationState(definition.getId(), CreationState.Created);
     }
 
-    private void createSuperTypeAndBeanNameMap() throws ClassNotFoundException {
+    private void setBeanCreationState(String beanName, CreationState state) {
+        CreationState currentState = objectCreationStates.get(beanName);
+        if (false == objectCreationStates.containsKey(beanName)) {
+            objectCreationStates.putIfAbsent(beanName, state);
+        } else {
+            objectCreationStates.put(beanName, state);
+        }
+    }
+
+    private boolean beanIsCreating(String beanName) {
+        CreationState creationState = objectCreationStates.get(beanName);
+        if (creationState == null) {
+            setBeanCreationState(beanName, CreationState.NotCreated);
+            return false;
+        }
+        return creationState == CreationState.Creating;
+    }
+
+    private void addUnfilledFiled(String beanName, Object instance, Field field) {
+        Set<Unfilled> fields = unfilledFields.get(beanName);
+        if (fields == null) {
+            fields = new HashSet<>();
+        }
+        boolean exists = CollectionUtils.contains(fields, f -> f.instance == instance);
+        if (false == exists) {
+            fields.add(new Unfilled(instance, field));
+        }
+    }
+
+    private Object createInstance(Class<?> type) throws IllegalAccessException,
+            ClassNotFoundException, InstantiationException {
+        if (type.equals(TransactionInterceptor.class)) {
+            // The stupid method to solve the recursive problem
+            return type.newInstance();
+        }
+
+        Enhancer enhancer = new Enhancer();
+        enhancer.setSuperclass(type);
+
+        // Prepare callbacks
+        // To make the sample easier, we don't consider customized
+        // interceptors here.
+        TransactionInterceptor interceptor = (TransactionInterceptor)
+                this.getBeanInternal(TransactionInterceptor.class);
+        enhancer.setCallback(interceptor);
+
+        return enhancer.create();
+    }
+
+    private Object getBeanInternal(Class<?> type) throws IllegalAccessException,
+            InstantiationException, ClassNotFoundException {
+        String beanName = getOrAddTypeAndBeanNameMap(type);
+        return getBeanInternal(beanName);
+    }
+
+    private Object getBeanInternal(String beanName) throws IllegalAccessException,
+            InstantiationException, ClassNotFoundException {
+        Object bean = beans.get(beanName);
+        if (bean == null) {
+            BeanDefinition definition = CollectionUtils.getSingleOrDefault(
+                    Arrays.asList(this.configuration.getBeanDefinitions().clone()),
+                    d -> d.getId().equals(beanName)
+            );
+            // TODO: add the new bean definition to the list
+
+            this.createBean(definition);
+            bean = beans.get(beanName);
+        }
+
+        return bean;
+    }
+
+    private void createTypeNameAndBeanNameMap() throws ClassNotFoundException {
         for (BeanDefinition definition: this.configuration.getBeanDefinitions()) {
             Class<?> type = Class.forName(definition.getKlass());
             String beanName = definition.getId();
@@ -277,7 +374,7 @@ public class AppContextBeanFactory implements BeanFactory {
 
         // Iterate all the keys of beanTypeAndNamesMap to find
         // out if there is a type which inherited from current type.
-        beanTypeAndNamesMap.forEachKey(1000, k -> {
+        beanTypeAndNamesMap.forEachKey(PARALLELISM_THRESHOLD, k -> {
             if (type.isAssignableFrom(k)) {
                 String name = beanTypeAndNamesMap.get(k);
                 beanName.set(name);
@@ -301,18 +398,13 @@ public class AppContextBeanFactory implements BeanFactory {
         // To make the sample easier, we just handle the private fields here.
         for (Field field: autowiredFields) {
             String beanName = getOrAddTypeAndBeanNameMap(field.getType());
-            Object bean = beans.get(beanName);
-            if (bean == null) {
-                BeanDefinition definition = CollectionUtils.getSingleOrDefault(
-                        Arrays.asList(this.configuration.getBeanDefinitions().clone()),
-                        d -> d.getId() == beanName
-                );
-                // TODO: add the new bean definition to the list
-
-                createBean(definition);
-                bean = beans.get(beanName);
+            if (beanIsCreating(beanName)) {
+                // cycle-reference detected
+                addUnfilledFiled(beanName, instance, field);
+                continue;
             }
 
+            Object bean = getBeanInternal(beanName);
             FieldUtils.writeField(field, instance, bean, true);
         }
     }
@@ -342,20 +434,12 @@ public class AppContextBeanFactory implements BeanFactory {
                     Object value;
                     String ref = prop.getRef();
                     if (false == Strings.isNullOrEmpty(ref)) {
-                        Object refObject = beans.get(ref);
-                        if (refObject == null) {
-                            BeanDefinition definition = CollectionUtils.getSingleOrDefault(
-                                    Arrays.asList(this.configuration.getBeanDefinitions().clone()),
-                                    d -> d.getId() == ref
-                            );
-                            if (definition == null) {
-                                // TODO: deal with ref bean not found situation
-                            } else {
-                                createBean(definition);
-                                refObject = beans.get(ref);
-                            }
+                        if (beanIsCreating(ref)) {
+                            // cycle-reference detected
+                            addUnfilledFiled(ref, instance, field);
+                            continue;
                         }
-                        value = refObject;
+                        value = getBeanInternal(ref);
                     } else {
                         value = parse(prop.getValue(), field.getType());
                     }
@@ -383,6 +467,28 @@ public class AppContextBeanFactory implements BeanFactory {
         }
 
         return result;
+    }
+
+    private enum CreationState {
+        NotCreated, Creating, Created
+    }
+
+    private class Unfilled {
+        private Object instance;
+        private Field field;
+
+        public Unfilled(Object instance, Field field) {
+            this.instance = instance;
+            this.field = field;
+        }
+
+        public Object getInstance() {
+            return instance;
+        }
+
+        public Field getField() {
+            return field;
+        }
     }
 
 }

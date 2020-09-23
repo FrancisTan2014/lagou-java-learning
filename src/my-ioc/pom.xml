@@ -74,6 +74,11 @@
       <artifactId>commons-lang3</artifactId>
       <version>3.11</version>
     </dependency>
+      <dependency>
+          <groupId>cglib</groupId>
+          <artifactId>cglib</artifactId>
+          <version>3.3.0</version>
+      </dependency>
   </dependencies>
 
   <build>
@@ -109,8 +114,8 @@
         </plugin>
         <plugin>
           <groupId>org.apache.tomcat.maven</groupId>
-          <artifactId>tomcat7-maven-plugin</artifactId>
-          <version>2.2</version>
+          <artifactId>tomcat8-maven-plugin</artifactId>
+          <version>3.0-r1756463</version>
           <configuration>
             <port>8080</port>
             <path>/</path>
