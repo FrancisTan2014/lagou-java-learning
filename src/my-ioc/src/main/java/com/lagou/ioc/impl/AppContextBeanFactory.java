@@ -47,9 +47,9 @@ public class AppContextBeanFactory implements BeanFactory {
     }
 
     @Override
-    public Object getBean(Class<?> type) {
+    public <T> T getBean(Class<T> type) {
         String beanName = getOrAddTypeAndBeanNameMap(type);
-        return beans.get(beanName);
+        return (T) beans.get(beanName);
     }
 
     public AppContextBeanFactory() throws IOException, DocumentException,

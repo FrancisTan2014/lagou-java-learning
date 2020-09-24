@@ -23,7 +23,7 @@ public class TransferServlet extends HttpServlet {
             IllegalAccessException, InstantiationException, ClassNotFoundException {
         try {
             BeanFactory factory = new AppContextBeanFactory();
-            accountService = (AccountService) factory.getBean(AccountService.class);
+            accountService = factory.getBean(AccountService.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

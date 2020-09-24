@@ -4,6 +4,6 @@ public interface BeanFactory {
 
     Object getBean(String name);
 
-    Object getBean(Class<?> type);
+    <T> T getBean(Class<T> type);
 
 }
