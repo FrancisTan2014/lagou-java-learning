@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.lagou.ioc.*;
 import com.lagou.ioc.aop.TransactionInterceptor;
+import com.lagou.ioc.aop.Transactional;
 import com.lagou.utils.CollectionUtils;
 import net.sf.cglib.proxy.Enhancer;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -18,6 +19,7 @@ import org.reflections.Reflections;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -313,8 +315,8 @@ public class AppContextBeanFactory implements BeanFactory {
 
     private Object createInstance(Class<?> type) throws IllegalAccessException,
             ClassNotFoundException, InstantiationException {
-        if (type.equals(TransactionInterceptor.class)) {
-            // The stupid method to solve the recursive problem
+        if (false == typeNeedIntercepter(type)) {
+            // To make the sample easier, we just consider the default constructor.
             return type.newInstance();
         }
 
@@ -329,6 +331,23 @@ public class AppContextBeanFactory implements BeanFactory {
         enhancer.setCallback(interceptor);
 
         return enhancer.create();
+    }
+
+    private boolean typeNeedIntercepter(Class<?> type) {
+        List<Annotation> annotations = new ArrayList<>();
+        annotations.addAll(Arrays.asList(type.getAnnotations()));
+        for (Method method: type.getDeclaredMethods()) {
+            annotations.addAll(Arrays.asList(method.getAnnotations()));
+        }
+
+        // To make the sample easier
+        for (Annotation annotation: annotations) {
+            if (annotation instanceof Transactional) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private Object getBeanInternal(Class<?> type) throws IllegalAccessException,

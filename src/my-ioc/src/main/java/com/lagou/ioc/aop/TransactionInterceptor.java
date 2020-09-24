@@ -33,7 +33,8 @@ public class TransactionInterceptor implements MethodInterceptor {
         boolean autoCommit = connection.getAutoCommit();
         try {
             connection.setAutoCommit(false);
-            Object result = method.invoke(o, objects);
+//            Object result = method.invoke(o, objects);
+            Object result = methodProxy.invokeSuper(o, objects);
             connection.commit();
             return result;
         } catch (Exception e) {
