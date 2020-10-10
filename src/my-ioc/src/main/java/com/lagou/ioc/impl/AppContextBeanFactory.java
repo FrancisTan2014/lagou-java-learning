@@ -261,6 +261,10 @@ public class AppContextBeanFactory implements BeanFactory {
     private void createBean(BeanDefinition definition)
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException {
+        if (isBeanCreated(definition.getId())) {
+            return;
+        }
+
         setBeanCreationState(definition.getId(), CreationState.Creating);
 
         Class<?> type = Class.forName(definition.getKlass());
@@ -282,6 +286,10 @@ public class AppContextBeanFactory implements BeanFactory {
         invokeNoParamsMethod(type, instance, definition.getInitMethod());
 
         setBeanCreationState(definition.getId(), CreationState.Created);
+    }
+
+    private boolean isBeanCreated(String beanName) {
+        return CreationState.Created.equals(objectCreationStates.get(beanName));
     }
 
     private void setBeanCreationState(String beanName, CreationState state) {

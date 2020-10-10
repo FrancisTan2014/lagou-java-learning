@@ -40,11 +40,9 @@ public class TransferServlet extends HttpServlet {
             boolean success = accountService.transfer(fromCardNo, toCardNo, money);
             response.setStatusCode(success ? 200 : 500);
             response.setMessage(success ? "转账成功" : "转账失败");
-        } catch (SQLException e) {
+        } catch (Exception e) {
             response.setStatusCode(500);
             response.setMessage(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         String json = JSON.toJSONString(response);
